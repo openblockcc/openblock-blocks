@@ -472,7 +472,7 @@ class Gen_compressed(threading.Thread):
       compiledCode = json_data["compiledCode"]
 
       if (compiledCode.find("new Blockly.Generator") != -1):
-        code = HEADER + "\nlet Blockly = require(\'openblock-blocks\');\n\n" + compiledCode
+        code = HEADER + "\nlet Blockly = require(\'scratch-arduino-blocks\');\n\n" + compiledCode
       else:
         code = HEADER + "\n" + compiledCode
 

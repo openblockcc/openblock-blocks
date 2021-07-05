@@ -23,4 +23,4 @@ common.pyc
 /gh-pages
 
 # Exclude already built packages from testing with npm pack
-/openblock-blocks-*.{tar,tgz}
+/scratch-arduino-blocks-*.{tar,tgz}

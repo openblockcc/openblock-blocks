@@ -1,19 +1,19 @@
 {
-  "name": "openblock-blocks",
+  "name": "scratch-arduino-blocks",
   "version": "0.1.0",
   "description": "Scratch-HW Blocks is a library for building creative computing interfaces.",
   "author": "Massachusetts Institute of Technology",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/openblockcc/openblock-blocks#readme",
+  "homepage": "https://github.com/ottawastem/scratch-arduino-blocks#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openblockcc/openblock-blocks.git"
+    "url": "https://github.com/ottawastem/scratch-arduino-blocks.git"
   },
   "main": "./dist/vertical.js",
   "browser": "./shim/vertical.js",
   "scripts": {
     "deploy": "rimraf gh-pages/closure-library/scripts/ci/CloseAdobeDialog.exe && gh-pages -t -d gh-pages -m \"Build for $(git log --pretty=format:%H -n1)\"",
-    "prepublish": "python build.py && webpack",
+    "prepublish": "C:\\Tools\\Python27\\python build.py && webpack",
     "clean": "rm *compressed.js && rm blockly*.js && rm blocks*.js",
     "test:unit": "node tests/jsunit/test_runner.js",
     "test:lint": "eslint .",

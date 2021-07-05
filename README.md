@@ -1,5 +1,5 @@
-# openblock-blocks
-![](https://img.shields.io/travis/com/openblockcc/openblock-blocks) ![](https://img.shields.io/github/license/openblockcc/openblock-blocks)
+# scratch-arduino-blocks
+![](https://img.shields.io/travis/com/ottawastem/scratch-arduino-blocks) ![](https://img.shields.io/github/license/ottawastem/scratch-arduino-blocks)
 
 ## Instructions
 
