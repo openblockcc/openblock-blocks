@@ -42,7 +42,7 @@
     "graceful-fs": "4.1.11",
     "json": "9.0.4",
     "rimraf": "2.6.2",
-    "openblock-l10n": "latest",
+    "scratch-arduino-l10n": "latest",
     "selenium-webdriver": "^4.0.0-alpha.1",
     "transifex": "1.6.6",
     "travis-after-all": "1.4.4",

@@ -24,7 +24,7 @@ const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
 const transifex = require('transifex');
-const locales = require('openblock-l10n').default;
+const locales = require('scratch-arduino-l10n').default;
 
 // Globals
 const PATH_OUTPUT = path.resolve(__dirname, '../msg');
