@@ -28,7 +28,7 @@ const locales = require('scratch-arduino-l10n').default;
 
 // Globals
 const PATH_OUTPUT = path.resolve(__dirname, '../msg');
-const PROJECT = 'openblock-editor'
+const PROJECT = 'scratch-arduino-editor'
 const RESOURCE = 'blocks';
 const MODE = {mode: 'reviewed'};
 

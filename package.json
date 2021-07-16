@@ -1,6 +1,6 @@
 {
   "name": "scratch-arduino-blocks",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Scratch-HW Blocks is a library for building creative computing interfaces.",
   "author": "Massachusetts Institute of Technology",
   "license": "Apache-2.0",
@@ -21,7 +21,7 @@
     "test": "npm run test:lint && npm run test:messages && npm run test:unit",
     "version": "json -f package.json -I -e \"this.repository.sha = '$(git log -n1 --pretty=format:%H)'\"",
     "translate": "node i18n/js_to_json.js && node i18n/json_to_js.js",
-    "translate:sync:src": "tx-push-src openblock-editor blocks msg/json/en.json",
+    "translate:sync:src": "tx-push-src scratch-arduino-editor blocks msg/json/en.json",
     "translate:sync:translations": "node i18n/sync_tx_translations.js",
     "translate:update": "npm run translate:sync:src && npm run translate:sync:translations"
   },
