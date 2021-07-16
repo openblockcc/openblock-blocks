@@ -34,3 +34,11 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Emit repository_dispatch
+        uses: mvasigh/dispatch-action@main
+        with:
+          owner: ottawastem
+          repo: scratch-arduino-gui
+          event_type: release_scratch_arduino_blocks
+          token: ${{ secrets.TOKEN_GITHUB_SECRET }}
