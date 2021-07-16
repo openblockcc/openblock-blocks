@@ -19,6 +19,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "2.x"
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
@@ -26,6 +30,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           
       - run: npm install
+      - run: npm prepublish
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
