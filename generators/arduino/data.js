@@ -48,7 +48,6 @@ Blockly.Arduino['data_changevariableby'] = function(block) {
   var varName = Blockly.Arduino.variableDB_.getName(block.getFieldValue('VARIABLE'),
       Blockly.Variables.NAME_TYPE);
 
-  arg0 = parseFloat(arg0).toString();
   return varName + ' += ' + arg0 + ';\n';
 };
 

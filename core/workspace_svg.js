@@ -1568,7 +1568,7 @@ Blockly.WorkspaceSvg.prototype.updateToolbox = function(tree) {
     this.options.languageTree = tree;
     this.toolbox_.populate_(tree);
     this.toolbox_.position();
-    this.updateWorkspaceDisabled();
+    this.updateWorkspaceBlocksDisabledState();
     Blockly.Events.fire(new Blockly.Events.UpdateToolboxFinish(this));
   } else {
     if (!this.flyout_) {
@@ -1580,9 +1580,9 @@ Blockly.WorkspaceSvg.prototype.updateToolbox = function(tree) {
 };
 
 /**
- * Modify the block tree in the workspace by attribute of disabled.
+ * Modify the blocks in the workspace by attribute of disabled.
  */
-Blockly.WorkspaceSvg.prototype.updateWorkspaceDisabled = function() {
+ Blockly.WorkspaceSvg.prototype.updateWorkspaceBlocksDisabledState = function() {
   var allBlock = this.getAllBlocks();
   var flyoutItems = this.getFlyout().getFlyoutItems();
 
