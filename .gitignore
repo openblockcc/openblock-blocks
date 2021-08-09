@@ -1,6 +1,9 @@
 # OSX
 .DS_Store
 
+# Python 2.7 Virtual Environment
+venv/
+
 # NPM
 /node_modules
 npm-*
