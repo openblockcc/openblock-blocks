@@ -140,13 +140,18 @@ Blockly.Arduino['arduino_serial_multiSerialBegin'] = function(block) {
 Blockly.Arduino['arduino_serial_multiSerialPrint'] = function(block) {
   var arg0 = block.getFieldValue('NO') || '0';
   var arg1 = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '';
+  var eol = block.getFieldValue('EOL') || 'warp';
 
   var code;
   if(arg0 === '0')
   {
     arg0 = '';
   }
-  code = 'Serial' + arg0 + '.println(' + arg1 + ');\n';
+  if (eol === 'warp') {
+    code = 'Serial' + arg0 + '.println(' + arg1 + ');\n';
+  } else {
+    code = 'Serial' + arg0 + '.print(' + arg1 + ');\n';
+  }
   return code;
 };
 

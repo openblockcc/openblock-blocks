@@ -1582,7 +1582,7 @@ Blockly.WorkspaceSvg.prototype.updateToolbox = function(tree) {
 /**
  * Modify the blocks in the workspace by attribute of disabled.
  */
- Blockly.WorkspaceSvg.prototype.updateWorkspaceBlocksDisabledState = function() {
+Blockly.WorkspaceSvg.prototype.updateWorkspaceBlocksDisabledState = function() {
   var allBlock = this.getAllBlocks();
   var flyoutItems = this.getFlyout().getFlyoutItems();
 
