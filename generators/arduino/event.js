@@ -23,7 +23,6 @@ goog.require('Blockly.Arduino');
 
 
 Blockly.Arduino['event_whenarduinobegin'] = function() {
-    // Blockly.Arduino.includes_["arduino"] = "#include <Arduino.h>\n#include <FastLED.h>";
     Blockly.Arduino.includes_["arduino"] = "#include <Arduino.h>";
 
     var code = "";
