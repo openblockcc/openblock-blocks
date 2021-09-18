@@ -118,7 +118,6 @@ Blockly.Arduino['arduino_serial_serialAvailable'] = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-
 Blockly.Arduino['arduino_serial_serialReadData'] = function() {
   var code = 'Serial.read()';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
@@ -167,7 +166,6 @@ Blockly.Arduino['arduino_serial_multiSerialAvailable'] = function(block) {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-
 Blockly.Arduino['arduino_serial_multiSerialReadAByte'] = function(block) {
   var arg0 = block.getFieldValue('NO') || '0';
   var code;
@@ -207,12 +205,12 @@ Blockly.Arduino['arduino_data_dataConstrain'] = function(block) {
 
 Blockly.Arduino['arduino_data_dataConvert'] = function(block) {
   var arg0 = Blockly.Arduino.valueToCode(block, 'DATA', Blockly.Arduino.ORDER_UNARY_POSTFIX) || 0;
-  var arg1 = block.getFieldValue('TYPE') || 'WHOLE_NUMBER';
+  var arg1 = block.getFieldValue('TYPE') || 'INTEGER';
 
   var code;
 
   switch(arg1) {
-    case 'WHOLE_NUMBER':
+    case 'INTEGER':
       code = 'String(' + arg0 + ').toInt()';
       break;
     case 'DECIMAL':
@@ -240,4 +238,156 @@ Blockly.Arduino['arduino_data_dataConvertASCIINumber'] = function(block) {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+// FastLED
+Blockly.Arduino['arduino_fastled_setLEDNumber'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'NUMBER', Blockly.Arduino.ORDER_NONE) || 5;
 
+  Blockly.Arduino.includes_['include_fastled'] = '#include <FastLED.h>';
+  Blockly.Arduino.definitions_['definitions_fasled_setLEDNumber'] = 
+      '#define NUM_LEDS    ' + arg0 + '\n' +
+      'CRGB leds[NUM_LEDS];';
+  Blockly.Arduino.setups_['setups_fastled_setLEDNumber'] = 'FastLED.addLeds<WS2813, 3, GRB>(leds, NUM_LEDS);\n';
+  return '';
+};
+
+Blockly.Arduino['arduino_fastled_setBrightness'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'NUMBER', Blockly.Arduino.ORDER_NONE) || 10;
+  var code = 'FastLED.setBrightness(' + arg0 + ');\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_setAllLEDColor'] = function(block) {
+  var arg0 = block.getFieldValue('COLOR');
+
+  var code = 'fill_solid(leds, NUM_LEDS, CRGB::' + arg0 + ');\n';
+  code += 'FastLED.show();\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_setAllLEDColorRGB'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'RED', Blockly.Arduino.ORDER_NONE) || 255;
+  var arg1 = Blockly.Arduino.valueToCode(block, 'GREEN', Blockly.Arduino.ORDER_NONE) || 255;
+  var arg2 = Blockly.Arduino.valueToCode(block, 'BLUE', Blockly.Arduino.ORDER_NONE) || 255;
+
+  var code = 'fill_solid(leds, NUM_LEDS, CRGB(' + arg0 + ', ' + arg1 + ', ' + arg2 + '));\n';
+  code += 'FastLED.show();\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_setAllLEDColorHSV'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'HUE', Blockly.Arduino.ORDER_NONE) || 255;
+  var arg1 = Blockly.Arduino.valueToCode(block, 'SATURATION', Blockly.Arduino.ORDER_NONE) || 255;
+  var arg2 = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_NONE) || 255;
+  
+  var code = 'fill_solid(leds, NUM_LEDS, CHSV(' + arg0 + ', ' + arg1 + ', ' + arg2 + '));\n';
+  code += 'FastLED.show();\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_setLEDColorGradient'] = function(block) {
+  var arg0 = block.getFieldValue('COLOR_FROM');
+  var arg1 = block.getFieldValue('COLOR_TO');
+
+  var code = 'fill_gradient_RGB(leds, NUM_LEDS, CRGB::' + arg0 + ', CRGB::' + arg1 + ');\n';
+  code += 'FastLED.show();\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_setLEDColorRainbow'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'MILLISECOND', Blockly.Arduino.ORDER_NONE) || 1;
+  
+  Blockly.Arduino.definitions_['arduino_fastled_setLEDColorRainbow'] = 'float hue;'
+  var code = 'for (int i = 0; i < NUM_LEDS; i++) {\n';
+  code += '  leds[i] = CHSV(hue, 255, 255);\n';
+  code += '}\n';
+  code += 'EVERY_N_MILLISECONDS(' + arg0 + ') {\n';
+  code += '  hue++;\n';
+  code += '}\n';
+  code += 'FastLED.show();\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_setLEDColor'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'NUMBER', Blockly.Arduino.ORDER_NONE);
+  var arg1 = block.getFieldValue('COLOR');
+
+  var code = 'leds[' + arg0 + '] = CRGB::' + arg1 + ';\n';
+  code += 'FastLED.show();\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_setLEDColorRGB'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'NUMBER', Blockly.Arduino.ORDER_NONE) || 0;
+  var arg1 = Blockly.Arduino.valueToCode(block, 'RED', Blockly.Arduino.ORDER_NONE) || 255;
+  var arg2 = Blockly.Arduino.valueToCode(block, 'GREEN', Blockly.Arduino.ORDER_NONE) || 255;
+  var arg3 = Blockly.Arduino.valueToCode(block, 'BLUE', Blockly.Arduino.ORDER_NONE) || 255;
+
+  var code = 'leds[' + arg0 + '] = CRGB(' + arg1 + ', ' + arg2 + ', ' + arg3 + ');\n';
+  code += 'FastLED.show();\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_setLEDColorHSV'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'NUMBER', Blockly.Arduino.ORDER_NONE) || 0;
+  var arg1 = Blockly.Arduino.valueToCode(block, 'HUE', Blockly.Arduino.ORDER_NONE) || 255;
+  var arg2 = Blockly.Arduino.valueToCode(block, 'SATURATION', Blockly.Arduino.ORDER_NONE) || 255;
+  var arg3 = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_NONE) || 255;
+
+  var code = 'leds[' + arg0 + '] = CHSV(' + arg1 + ', ' + arg2 + ', ' + arg3 + ');\n';
+  code += 'FastLED.show();\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_repeat'] = function(block) {
+  var branch = Blockly.Arduino.statementToCode(block, 'SUBSTACK');
+  branch = Blockly.Arduino.addLoopTrap(branch, block.id);
+
+  var code = 'for (int i = 0; i < NUM_LEDS; i++) {\n';
+  code += branch;
+  code += '}\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_repeat_n_ms'] = function(block) {
+  var branch = Blockly.Arduino.statementToCode(block, 'SUBSTACK');
+  branch = Blockly.Arduino.addLoopTrap(branch, block.id);
+  var arg0 = Blockly.Arduino.valueToCode(block, 'MILLISECOND', Blockly.Arduino.ORDER_NONE) || 0;
+
+  var code = 'EVERY_N_MILLISECONDS(' + arg0 + ') {\n';
+  code += branch;
+  code += '}\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_repeat_n_s'] = function(block) {
+  var branch = Blockly.Arduino.statementToCode(block, 'SUBSTACK');
+  branch = Blockly.Arduino.addLoopTrap(branch, block.id);
+  var arg0 = Blockly.Arduino.valueToCode(block, 'SECOND', Blockly.Arduino.ORDER_NONE) || 0;
+
+  var code = 'EVERY_N_SECONDS(' + arg0 + ') {\n';
+  code += branch;
+  code += '}\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_repeat_n_min'] = function(block) {
+  var branch = Blockly.Arduino.statementToCode(block, 'SUBSTACK');
+  branch = Blockly.Arduino.addLoopTrap(branch, block.id);
+  var arg0 = Blockly.Arduino.valueToCode(block, 'MINTUE', Blockly.Arduino.ORDER_NONE) || 0;
+
+  var code = 'EVERY_N_MINTUES(' + arg0 + ') {\n';
+  code += branch;
+  code += '}\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_repeat_n_hour'] = function(block) {
+  var branch = Blockly.Arduino.statementToCode(block, 'SUBSTACK');
+  branch = Blockly.Arduino.addLoopTrap(branch, block.id);
+  var arg0 = Blockly.Arduino.valueToCode(block, 'HOUR', Blockly.Arduino.ORDER_NONE) || 0;
+
+  var code = 'EVERY_N_HOURS(' + arg0 + ') {\n';
+  code += branch;
+  code += '}\n';
+  return code;
+};

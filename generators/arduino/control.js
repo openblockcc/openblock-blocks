@@ -36,7 +36,7 @@ Blockly.Arduino['control_repeat'] = function(block) {
   var branch = Blockly.Arduino.statementToCode(block, 'SUBSTACK');
   branch = Blockly.Arduino.addLoopTrap(branch, block.id);
 
-  var code = "for (int i=0; i<" + repeats + "; i++) {\n";
+  var code = "for (int i = 0; i < " + repeats + "; i++) {\n";
   code += branch;
   code += "}\n";
   return code;

@@ -42,7 +42,6 @@ Blockly.Arduino['arduino_pin_esp32SetDACOutput'] = function(block) {
   return code;
 };
 
-
 Blockly.Arduino['arduino_pin_esp32ReadTouchPin'] = function(block) {
   var arg0 = block.getFieldValue('PIN') || '0';
   var code = "touchRead(" + arg0 + ")";
