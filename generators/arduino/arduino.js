@@ -265,21 +265,12 @@ Blockly.Arduino['arduino_fastled_setAllLEDColor'] = function(block) {
 };
 
 Blockly.Arduino['arduino_fastled_setAllLEDColorRGB'] = function(block) {
-  var arg0 = Blockly.Arduino.valueToCode(block, 'RED', Blockly.Arduino.ORDER_NONE) || 255;
-  var arg1 = Blockly.Arduino.valueToCode(block, 'GREEN', Blockly.Arduino.ORDER_NONE) || 255;
-  var arg2 = Blockly.Arduino.valueToCode(block, 'BLUE', Blockly.Arduino.ORDER_NONE) || 255;
-
-  var code = 'fill_solid(leds, NUM_LEDS, CRGB(' + arg0 + ', ' + arg1 + ', ' + arg2 + '));\n';
-  code += 'FastLED.show();\n';
-  return code;
-};
-
-Blockly.Arduino['arduino_fastled_setAllLEDColorHSV'] = function(block) {
-  var arg0 = Blockly.Arduino.valueToCode(block, 'HUE', Blockly.Arduino.ORDER_NONE) || 255;
-  var arg1 = Blockly.Arduino.valueToCode(block, 'SATURATION', Blockly.Arduino.ORDER_NONE) || 255;
-  var arg2 = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_NONE) || 255;
+  const colour = Blockly.Arduino.valueToCode(block, 'COLOR', Blockly.Arduino.ORDER_NONE).replace('#', '');
+  const red = parseInt(colour.substring(0, 2), 16);
+  const green = parseInt(colour.substring(2, 4), 16);
+  const blue = parseInt(colour.substring(4, 6), 16);
   
-  var code = 'fill_solid(leds, NUM_LEDS, CHSV(' + arg0 + ', ' + arg1 + ', ' + arg2 + '));\n';
+  var code = 'fill_solid(leds, NUM_LEDS, CRGB(' + red + ', ' + green + ', ' + blue + '));\n';
   code += 'FastLED.show();\n';
   return code;
 };
@@ -318,22 +309,12 @@ Blockly.Arduino['arduino_fastled_setLEDColor'] = function(block) {
 
 Blockly.Arduino['arduino_fastled_setLEDColorRGB'] = function(block) {
   var arg0 = Blockly.Arduino.valueToCode(block, 'NUMBER', Blockly.Arduino.ORDER_NONE) || 0;
-  var arg1 = Blockly.Arduino.valueToCode(block, 'RED', Blockly.Arduino.ORDER_NONE) || 255;
-  var arg2 = Blockly.Arduino.valueToCode(block, 'GREEN', Blockly.Arduino.ORDER_NONE) || 255;
-  var arg3 = Blockly.Arduino.valueToCode(block, 'BLUE', Blockly.Arduino.ORDER_NONE) || 255;
+  const colour = Blockly.Arduino.valueToCode(block, 'COLOR', Blockly.Arduino.ORDER_NONE).replace('#', '');
+  const red = parseInt(colour.substring(0, 2), 16);
+  const green = parseInt(colour.substring(2, 4), 16);
+  const blue = parseInt(colour.substring(4, 6), 16);
 
-  var code = 'leds[' + arg0 + '] = CRGB(' + arg1 + ', ' + arg2 + ', ' + arg3 + ');\n';
-  code += 'FastLED.show();\n';
-  return code;
-};
-
-Blockly.Arduino['arduino_fastled_setLEDColorHSV'] = function(block) {
-  var arg0 = Blockly.Arduino.valueToCode(block, 'NUMBER', Blockly.Arduino.ORDER_NONE) || 0;
-  var arg1 = Blockly.Arduino.valueToCode(block, 'HUE', Blockly.Arduino.ORDER_NONE) || 255;
-  var arg2 = Blockly.Arduino.valueToCode(block, 'SATURATION', Blockly.Arduino.ORDER_NONE) || 255;
-  var arg3 = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_NONE) || 255;
-
-  var code = 'leds[' + arg0 + '] = CHSV(' + arg1 + ', ' + arg2 + ', ' + arg3 + ');\n';
+  var code = 'leds[' + arg0 + '] = CRGB(' + red + ', ' + green + ', ' + blue + ');\n';
   code += 'FastLED.show();\n';
   return code;
 };
