@@ -265,6 +265,16 @@ Blockly.Arduino['arduino_fastled_setAllLEDColor'] = function(block) {
 };
 
 Blockly.Arduino['arduino_fastled_setAllLEDColorRGB'] = function(block) {
+  var red = Blockly.Arduino.valueToCode(block, 'RED', Blockly.Arduino.ORDER_NONE) || 255;
+  var green = Blockly.Arduino.valueToCode(block, 'GREEN', Blockly.Arduino.ORDER_NONE) || 255;
+  var blue = Blockly.Arduino.valueToCode(block, 'BLUE', Blockly.Arduino.ORDER_NONE) || 255;
+  
+  var code = 'fill_solid(leds, NUM_LEDS, CRGB(' + red + ', ' + green + ', ' + blue + '));\n';
+  code += 'FastLED.show();\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_setAllLEDColorHSV'] = function(block) {
   const colour = Blockly.Arduino.valueToCode(block, 'COLOR', Blockly.Arduino.ORDER_NONE).replace('#', '');
   const red = parseInt(colour.substring(0, 2), 16);
   const green = parseInt(colour.substring(2, 4), 16);
@@ -308,6 +318,17 @@ Blockly.Arduino['arduino_fastled_setLEDColor'] = function(block) {
 };
 
 Blockly.Arduino['arduino_fastled_setLEDColorRGB'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'NUMBER', Blockly.Arduino.ORDER_NONE) || 0;
+  var red = Blockly.Arduino.valueToCode(block, 'RED', Blockly.Arduino.ORDER_NONE) || 255;
+  var green = Blockly.Arduino.valueToCode(block, 'GREEN', Blockly.Arduino.ORDER_NONE) || 255;
+  var blue = Blockly.Arduino.valueToCode(block, 'BLUE', Blockly.Arduino.ORDER_NONE) || 255;
+
+  var code = 'leds[' + arg0 + '] = CRGB(' + red + ', ' + green + ', ' + blue + ');\n';
+  code += 'FastLED.show();\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_fastled_setLEDColorHSV'] = function(block) {
   var arg0 = Blockly.Arduino.valueToCode(block, 'NUMBER', Blockly.Arduino.ORDER_NONE) || 0;
   const colour = Blockly.Arduino.valueToCode(block, 'COLOR', Blockly.Arduino.ORDER_NONE).replace('#', '');
   const red = parseInt(colour.substring(0, 2), 16);
