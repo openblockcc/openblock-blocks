@@ -8,5 +8,15 @@ npm install
 npm link
 ```
 
+# Compile in development
+```
+venv\Scripts\activate
+npm run prepublish
+```
 
-
+# Release
+```
+commit
+npm version patch
+merge to main
+```

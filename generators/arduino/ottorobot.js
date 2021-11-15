@@ -26,13 +26,13 @@ goog.require('Blockly.Arduino');
 Blockly.Arduino['arduino_ottoRobot_setInitial'] = function(block) {
     Blockly.Arduino.includes_['include_ottoRobot'] = '#include <Otto.h>\nOtto Otto;';
     Blockly.Arduino.definitions_['definitions_ottoRobot_setInitial'] = 
+    '#define PIN_TRIGGER         2   // TRIGGER PIN\n' +
+    '#define PIN_ECHO            3   // ECHO PIN\n' +
     '#define PIN_LEG_L           4   // Left leg servo\n' +
     '#define PIN_LEG_R           5   // Right leg servo\n' +
     '#define PIN_FOOT_L          6   // Left foot servo\n' +
     '#define PIN_FOOT_R          7   // Right foot servo\n' +
-    '#define PIN_TRIGGER         8   // TRIGGER PIN (8)\n' +
-    '#define PIN_ECHO            9   // ECHO PIN (9)\n' +
-    '#define PIN_BUZZER          13  // BUZZER PIN (13)\n';
+    '#define PIN_BUZZER          13  // BUZZER PIN\n';
     Blockly.Arduino.setups_['setups_ottoRobot_setInitial'] = 
         'Otto.init(PIN_LEG_L, PIN_LEG_R, PIN_FOOT_L, PIN_FOOT_R, true, PIN_BUZZER);\n' +
         '  Otto.sing(S_connection);   // Otto wake up!\n' +
