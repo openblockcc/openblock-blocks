@@ -527,7 +527,17 @@ Blockly.Flyout.prototype.show = function(xmlList) {
         // If we found a recycled item, reuse the BlockSVG from last time.
         // Otherwise, convert the XML block to a BlockSVG.
         var curBlock;
-        if (recycled > -1) {
+        var flag = false;
+        for (var idx=0; idx < xml.childNodes.length; idx++) {
+          var child = xml.childNodes[idx];
+          if (child.tagName === 'field') {
+            flag = true;
+            break;
+          }
+        }
+        if (flag) {
+          curBlock = Blockly.Xml.domToBlock(xml, this.workspace_);
+        } else if (recycled > -1) {
           curBlock = this.recycleBlocks_.splice(recycled, 1)[0];
         } else {
           curBlock = Blockly.Xml.domToBlock(xml, this.workspace_);
