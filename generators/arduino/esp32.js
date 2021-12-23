@@ -67,3 +67,26 @@ Blockly.Arduino['arduino_sensor_esp32ReadHallSensor'] = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+
+Blockly.Arduino['arduino_pin_esp32AttachInterrupt'] = function(block) {
+  var arg0 = block.getFieldValue('PIN') || '2';
+  var arg1 = block.getFieldValue('MODE') || 'RISING';
+
+  var branch = Blockly.Arduino.statementToCode(block, 'SUBSTACK');
+  branch = Blockly.Arduino.addLoopTrap(branch, block.id);
+
+  Blockly.Arduino.definitions_['definitions_ISR_' + arg1 + arg0] =
+    'void ISR_' + arg1 + '_' + arg0 + '() {\n' + branch + '}';
+
+  var code = 'attachInterrupt(' + arg0 + ', ISR_' + arg1 + '_' + arg0 + ', ' + arg1 + ');\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_pin_esp32DetachInterrupt'] = function(block) {
+  var arg0 = block.getFieldValue('PIN') || '2';
+
+  var code = 'detachInterrupt(' + arg0 + ');\n';
+  return code;
+};
+
+
