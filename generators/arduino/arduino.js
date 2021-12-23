@@ -81,7 +81,7 @@ Blockly.Arduino['arduino_pin_attachInterrupt'] = function(block) {
   branch = Blockly.Arduino.addLoopTrap(branch, block.id);
 
   Blockly.Arduino.definitions_['definitions_ISR_' + arg1 + arg0] =
-    'ISR_' + arg1 + '_' + arg0 + '() {\n' + branch + '}';
+    'void ISR_' + arg1 + '_' + arg0 + '() {\n' + branch + '}';
 
   var code = 'attachInterrupt(digitalPinToInterrupt(' + arg0 + '), ISR_' + arg1 + '_' + arg0 + ', ' + arg1 + ');\n';
   return code;
@@ -90,7 +90,7 @@ Blockly.Arduino['arduino_pin_attachInterrupt'] = function(block) {
 Blockly.Arduino['arduino_pin_detachInterrupt'] = function(block) {
   var arg0 = block.getFieldValue('PIN') || '2';
 
-  var code = 'detachInterrupt(digitalPinToInterrupt(' + arg0 + ');\n';
+  var code = 'detachInterrupt(digitalPinToInterrupt(' + arg0 + '));\n';
   return code;
 };
 
