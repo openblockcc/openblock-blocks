@@ -158,7 +158,7 @@ Blockly.Flyout = function(workspaceOptions) {
    * @type {!Array.<string>}
    * @private
    */
-  this.deviceTypeList_ = ['microbit','arduino'];
+  this.deviceTypeList_ = ['python','arduino'];
 };
 
 /**
