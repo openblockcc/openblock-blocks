@@ -2,7 +2,6 @@
  * Visual Blocks Language
  *
  * Copyright 2021 Arthur Zheng.
- * https://github.com/openblockcc/openblock-blocks
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,6 +61,7 @@ Blockly.Python['data_hidevariable'] = function() {
 Blockly.Python['data_listcontents'] = function(block) {
   var varName = Blockly.Python.variableDB_.getName(block.getFieldValue('LIST'),
       Blockly.Variables.NAME_TYPE);
+      
   return [varName, Blockly.Python.ORDER_ATOMIC];
 };
 
@@ -70,6 +70,10 @@ Blockly.Python['data_addtolist'] = function(block) {
       Blockly.Python.ORDER_ADDITIVE) || '0';
   var varName = Blockly.Python.variableDB_.getName(block.getFieldValue('LIST'),
       Blockly.Variables.NAME_TYPE);
+    // Arg is a number
+  if (parseFloat(item.slice(1, -1)) == item.slice(1, -1)) {
+    item = parseFloat(item.slice(1, -1)).toString();
+  }
 
   return varName + '.append(' + item + ')\n';
 };
@@ -97,6 +101,10 @@ Blockly.Python['data_insertatlist'] = function(block) {
       Blockly.Python.ORDER_ADDITIVE) || '0';
   var varName = Blockly.Python.variableDB_.getName(block.getFieldValue('LIST'),
       Blockly.Variables.NAME_TYPE);
+    
+  if (parseFloat(item.slice(1, -1)) == item.slice(1, -1)) {
+    item = parseFloat(item.slice(1, -1)).toString();
+  }
 
   return varName + '.insert(' + index + ' - 1, ' + item + ')\n';
 };
@@ -108,6 +116,10 @@ Blockly.Python['data_replaceitemoflist'] = function(block) {
       Blockly.Python.ORDER_ADDITIVE) || '0';
   var varName = Blockly.Python.variableDB_.getName(block.getFieldValue('LIST'),
       Blockly.Variables.NAME_TYPE);
+
+  if (parseFloat(item.slice(1, -1)) == item.slice(1, -1)) {
+    item = parseFloat(item.slice(1, -1)).toString();
+  }
 
   return varName + '[' + index + ' - 1] = ' + item + '\n';
 };
@@ -125,6 +137,10 @@ Blockly.Python['data_itemnumoflist'] = function(block) {
       Blockly.Python.ORDER_ADDITIVE) || '0';
   var varName = Blockly.Python.variableDB_.getName(block.getFieldValue('LIST'),
       Blockly.Variables.NAME_TYPE);
+  
+  if (parseFloat(item.slice(1, -1)) == item.slice(1, -1)) {
+    item = parseFloat(item.slice(1, -1)).toString();
+  }
   return [varName + '.index(' + item + ') + 1', Blockly.Python.ORDER_UNARY_SIGN];
 };
 
@@ -139,6 +155,10 @@ Blockly.Python['data_listcontainsitem'] = function(block) {
       Blockly.Python.ORDER_ADDITIVE) || '0';
   var varName = Blockly.Python.variableDB_.getName(block.getFieldValue('LIST'),
       Blockly.Variables.NAME_TYPE);
+
+  if (parseFloat(item.slice(1, -1)) == item.slice(1, -1)) {
+    item = parseFloat(item.slice(1, -1)).toString();
+  }
   return ['' + item + ' in ' + varName, Blockly.Python.ORDER_RELATIONAL];
 };
 
@@ -149,4 +169,3 @@ Blockly.Python['data_showlist'] = function() {
 Blockly.Python['data_hidelist'] = function() {
   return '';
 };
-

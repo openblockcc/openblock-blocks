@@ -23,10 +23,12 @@ goog.provide('Blockly.Python.control');
 goog.require('Blockly.Python');
 
 
-Blockly.Python['control_wait'] = function(block) {
+Blockly.Python['control_wait_ms'] = function(block) {
+	Blockly.Python.imports_["control_wait_ms"] = "import time";
   var arg0 = Blockly.Python.valueToCode(block, 'DURATION',
       Blockly.Python.ORDER_FUNCTION_CALL);
-  var code = "sleep(" + arg0 + " * 1000" + ")\n";
+  var arg1 = block.getFieldValue('WAIT_MENU');
+  var code = "time." + arg1 + "(" + arg0 +")\n";
   return code;
 };
 
@@ -49,7 +51,9 @@ Blockly.Python['control_forever'] = function(block) {
   var branch = Blockly.Python.statementToCode(block, 'SUBSTACK');
   branch = Blockly.Python.addLoopTrap(branch, block.id);
 
-  if (block.getRootBlock().type === 'event_whenmicrobitbegin') {
+  if (block.getRootBlock().type === 'microbit_Microbit__whenmicrobitbegin' || 
+  block.getRootBlock().type === 'maixduino_Maixduino__whenmaixduinobegin' || 
+  block.getRootBlock().type === 'raspberrypico_RaspberryPico__whenraspberrypicobegin' ) {
     Blockly.Python.firstLoop = false;
   }
 

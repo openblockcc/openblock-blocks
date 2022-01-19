@@ -63,15 +63,23 @@ Blockly.Arduino['operator_compare'] = function(block) {
   var arg0 = Blockly.Arduino.valueToCode(block, 'OPERAND1', order);
   var arg1 = Blockly.Arduino.valueToCode(block, 'OPERAND2', order);
 
-  if (parseFloat(arg0.slice(1, -1)) == arg0.slice(1, -1)) { // Arg is a number
+ if (parseFloat(arg0.slice(1, -1)) == arg0.slice(1, -1)) { // Arg is a number
     arg0 = parseFloat(arg0.slice(1, -1)).toString();
   } else if (arg0 === "\"\"") { // Arg is a empty string
     arg0 = '0';
   } else if (arg0.charAt(0) === '"' && arg0.charAt(arg0.length - 1) === '"') {
     if (arg0.length === 3) { // Arg is a single character
       arg0 = arg0.replace(/"/g, '\'');
-    } else { // Arg is a string
-      arg0 = 'String(' + arg0 + ')';
+    }else if(arg0.length === 7 && arg0.charAt(1) === '\\' && arg0.charAt(arg0.length - 2) === '\''){
+	  arg0 = arg0.replace(/'/g, '');
+	  arg0 = arg0.replace(/\\/g, '');
+	  arg0 = arg0.replace(/"/g, '\'');
+	}else if(arg0.charAt(1) === '"' && arg0.charAt(arg0.length - 2) === '"'){
+	  arg0 = arg0.replace(/"/g, '');
+	  arg0 = 'String("' + arg0 + '")';
+	} 
+	else { // Arg is a string
+      arg0 = 'String(' + arg0 + ')'; 
     }
   }
   if (parseFloat(arg1.slice(1, -1)) == arg1.slice(1, -1)) {
@@ -81,13 +89,21 @@ Blockly.Arduino['operator_compare'] = function(block) {
   } else if (arg1.charAt(0) === '"' && arg1.charAt(arg1.length - 1) === '"') {
     if (arg1.length === 3) {
       arg1 = arg1.replace(/"/g, '\'');
-    } else {
+    }else if(arg1.length === 7 && arg1.charAt(1) === '\\' && arg1.charAt(arg1.length - 2) === '\''){
+	  arg1 = arg1.replace(/'/g, '');//arg is a number in single quotes
+	  arg1 = arg1.replace(/\\/g, '');
+	  arg1 = arg1.replace(/"/g, '\'');
+	}else if(arg1.charAt(1) === '"' && arg1.charAt(arg1.length - 2) === '"'){
+	  arg1 = arg1.replace(/"/g, '');//arg is a number in double quotes
+	  arg1 = 'String("' + arg1 + '")';
+	}
+	else {
       arg1 = 'String(' + arg1 + ')';
     }
-  }
+  } 
 
   var op = oplist[block.type];
-  var code = arg0 + op + arg1;
+  var code = arg0 + op + arg1; 
   return [code, order];
 };
 

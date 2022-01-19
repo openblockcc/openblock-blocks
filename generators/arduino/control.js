@@ -43,8 +43,11 @@ Blockly.Arduino['control_repeat'] = function(block) {
 };
 
 Blockly.Arduino['control_forever'] = function(block) {
-  if (Blockly.Arduino.firstLoop && !block.getSurroundParent()
-    && block.getRootBlock().type === 'event_whenarduinobegin') {
+  if (Blockly.Arduino.firstLoop && !block.getSurroundParent() &&
+       (block.getRootBlock().type === 'arduino_UNO_UNOheader' || 
+	    block.getRootBlock().type === 'arduino_Mega2560_Mega2560header' ||  block.getRootBlock().type === 'arduino_UnoUltra_UnoUltraheader' ||
+		block.getRootBlock().type === 'arduino_Leonardo_Leonardoheader' ||  block.getRootBlock().type === 'arduino_ESP32_Esp32header' ||
+		block.getRootBlock().type === 'arduino_ESP8266_Esp8266header' ||  block.getRootBlock().type === 'arduino_MakeyMakey_makeyMakeyheader' )){
     Blockly.Arduino.firstLoop = false;
 
     var branch = Blockly.Arduino.statementToCode(block, 'SUBSTACK');

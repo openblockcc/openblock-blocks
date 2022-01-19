@@ -22,6 +22,40 @@ goog.provide('Blockly.Arduino.arduino');
 
 goog.require('Blockly.Arduino');
 
+Blockly.Arduino['arduino_UNO_UNOheader'] = function(block) {
+  Blockly.Arduino.includes_['include_uno'] = '#include <Arduino.h>';
+  return '';
+};
+
+Blockly.Arduino['arduino_Mega2560_Mega2560header'] = function(block) {
+  Blockly.Arduino.includes_['include_mega2560'] = '#include <Arduino.h>';
+  return '';
+};
+
+Blockly.Arduino['arduino_UnoUltra_UnoUltraheader'] = function(block) {
+  Blockly.Arduino.includes_['include_unoUltra'] = '#include <Arduino.h>';
+  return '';
+};
+
+Blockly.Arduino['arduino_Leonardo_Leonardoheader'] = function(block) {
+  Blockly.Arduino.includes_['include_Leonardo'] = '#include <Arduino.h>';
+  return '';
+};
+
+Blockly.Arduino['arduino_ESP32_Esp32header'] = function(block) {
+  Blockly.Arduino.includes_['include_Esp32'] = '#include <Arduino.h>';
+  return '';
+};
+
+Blockly.Arduino['arduino_ESP8266_Esp8266header'] = function(block) {
+  Blockly.Arduino.includes_['include_Esp8266'] = '#include <Arduino.h>';
+  return '';
+};
+
+Blockly.Arduino['arduino_MakeyMakey_makeyMakeyheader'] = function(block) {
+  Blockly.Arduino.includes_['include_makeyMakey'] = '#include <Arduino.h>';
+  return '';
+};
 
 Blockly.Arduino['arduino_pin_setPinMode'] = function(block) {
   var arg0 = block.getFieldValue('PIN') || '0';
@@ -101,6 +135,13 @@ Blockly.Arduino['arduino_serial_serialBegin'] = function(block) {
   return code;
 };
 
+Blockly.Arduino['arduino_serial_serialTimeout'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'ARG0', Blockly.Arduino.ORDER_UNARY_POSTFIX) || 0;
+
+  var code = 'Serial.setTimeout(' + arg0 + ');\n';
+  return code;
+};
+
 Blockly.Arduino['arduino_serial_serialPrint'] = function(block) {
   var arg0 = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '';
   var eol = block.getFieldValue('EOL') || 'warp';
@@ -124,6 +165,22 @@ Blockly.Arduino['arduino_serial_serialReadData'] = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino['arduino_serial_serialReadInteger'] = function() {
+   var code = 'Serial.parseInt()';
+   return [code, Blockly.Arduino.ORDER_ATOMIC];
+ };
+
+ Blockly.Arduino['arduino_serial_serialReadString'] = function() {
+   var code = 'String cmd;\ncmd = Serial.readString();\n';
+   return code;
+ };
+
+ Blockly.Arduino['arduino_serial_serialCompareString'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '';
+  var code = 'cmd == ' + arg0;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino['arduino_serial_multiSerialBegin'] = function(block) {
   var arg0 = block.getFieldValue('NO') || '0';
   var arg1 = block.getFieldValue('VALUE') || '9600';
@@ -137,11 +194,24 @@ Blockly.Arduino['arduino_serial_multiSerialBegin'] = function(block) {
   return code;
 };
 
+Blockly.Arduino['arduino_serial_multiSerialTimeout'] = function(block) {
+  var arg0 = block.getFieldValue('NO') || '0';
+  var arg1 = Blockly.Arduino.valueToCode(block, 'ARG1', Blockly.Arduino.ORDER_UNARY_POSTFIX) || 0;
+
+  var code;
+  if(arg0 === '0')
+  {
+    arg0 = '';
+  }
+  code = 'Serial' + arg0 + '.setTimeout(' + arg1 + ');\n';
+  return code;
+};
+
+
 Blockly.Arduino['arduino_serial_multiSerialPrint'] = function(block) {
   var arg0 = block.getFieldValue('NO') || '0';
   var arg1 = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '';
   var eol = block.getFieldValue('EOL') || 'warp';
-
   var code;
   if(arg0 === '0')
   {
@@ -177,6 +247,37 @@ Blockly.Arduino['arduino_serial_multiSerialReadAByte'] = function(block) {
   }
 
   var code = 'Serial' + arg0 + '.read()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino['arduino_serial_multiSerialReadInteger'] = function(block) {
+   var arg0 = block.getFieldValue('NO') || '0';
+   var code;
+   if(arg0 === '0')
+   {
+     arg0 = '';
+   }
+
+   var code = 'Serial' + arg0 + '.parseInt()';
+   return [code, Blockly.Arduino.ORDER_ATOMIC];
+ };
+
+ Blockly.Arduino['arduino_serial_multiSerialReadString'] = function(block) {
+   var arg0 = block.getFieldValue('NO') || '0';
+   var code;
+   if(arg0 === '0')
+   {
+     arg0 = '';
+   }
+
+   var code = 'String cmd;\ncmd = Serial' + arg0 + '.readString();\n';
+   return code;
+ };
+
+ Blockly.Arduino['arduino_serial_multiSerialCompareString'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '';
+  var code;
+  var code = 'cmd == ' + arg0;
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -239,5 +340,3 @@ Blockly.Arduino['arduino_data_dataConvertASCIINumber'] = function(block) {
   var code = 'toascii(String(' + arg0 + ')[0])';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
-
-

@@ -138,9 +138,9 @@ Blockly.Arduino.init = function(workspace) {
   var defvars = [];
   var variables = Blockly.Variables.allVariables(workspace);
   for (var x = 0; x < variables.length; x++) {
-    if (variables[x].type !== Blockly.LIST_VARIABLE_TYPE) {
-      defvars[x] = 'float ' + Blockly.Arduino.variableDB_.getName(variables[x].name, Blockly.Variables.NAME_TYPE) + ';';
-    }
+    defvars[x] = 'float ' +
+      Blockly.Arduino.variableDB_.getName(variables[x].name,
+          Blockly.Variables.NAME_TYPE) + ';';
   }
   if (variables.length > 0) {
     Blockly.Arduino.definitions_['variables'] = defvars.join('\n');
@@ -274,7 +274,10 @@ Blockly.Arduino.scrub_ = function(block, code) {
   var codeWithIndent = code;
   // Add indent at start of every line for the code in setup() function or custom function.
   if (block.getSurroundParent() === null && code !== ""
-    && (block.type !== 'control_forever' || block.getRootBlock().type !== 'event_whenarduinobegin')) {
+    && (block.type !== 'control_forever' || block.getRootBlock().type !== 'arduino_UNO_UNOheader' || 
+	     block.getRootBlock().type !== 'arduino_Mega2560_Mega2560header' ||  block.getRootBlock().type !== 'arduino_UnoUltra_UnoUltraheader' ||
+		  block.getRootBlock().type !== 'arduino_Leonardo_Leonardoheader' ||  block.getRootBlock().type !== 'arduino_ESP32_Esp32header' ||
+		   block.getRootBlock().type !== 'arduino_ESP8266_Esp8266header' ||  block.getRootBlock().type !== 'arduino_MakeyMakey_makeyMakeyheader' )) {
     // Add indent at start except custom function
     if (block.type !== 'procedures_definition'
       && block.type !== 'procedures_prototype') {

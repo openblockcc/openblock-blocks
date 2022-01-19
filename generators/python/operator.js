@@ -66,11 +66,22 @@ Blockly.Python['operator_compare'] = function(block) {
     arg0 = parseFloat(arg0.slice(1, -1)).toString();
   } else if (arg0 === "''") { // Arg is a empty string
     arg0 = '0';
+  } else if(arg0.charAt(1) === '\\' && arg0.charAt(arg0.length - 2) === '\''){
+	  arg0 = arg0.substring(3).slice(0,-3);//arg is a number in single quotes
+	  arg0 = '\'' + arg0 + '\'';
+  } else if(arg0.charAt(1) === '"' && arg0.charAt(arg0.length - 2) === '"'){
+	  arg0 = arg0.substring(1).slice(0,-1); //arg is number/string in double quotes
   }
+  
   if (parseFloat(arg1.slice(1, -1)) == arg1.slice(1, -1)) {
     arg1 = parseFloat(arg1.slice(1, -1)).toString();
   } else if (arg1 === "''") {
     arg1 = '0';
+  } else if(arg1.charAt(1) === '\\' && arg1.charAt(arg1.length - 2) === '\''){
+	  arg1 = arg1.substring(3).slice(0,-3);//arg is a number in single quotes
+	  arg1 = '\'' + arg1 + '\'';
+  } else if(arg1.charAt(1) === '"' && arg1.charAt(arg1.length - 2) === '"'){ 
+	  arg1 = arg1.substring(1).slice(0,-1); //arg is in double quotes
   }
 
   var op = oplist[block.type];

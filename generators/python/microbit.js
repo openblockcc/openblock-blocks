@@ -22,6 +22,128 @@ goog.provide('Blockly.Python.microbit');
 
 goog.require('Blockly.Python');
 
+Blockly.Python['microbit_Microbit_whenmicrobitbegin'] = function(block) {
+  Blockly.Python.imports_["microbit"] = "from microbit import *";
+
+  var code = "";
+  var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  if (!nextBlock) {
+    code += "pass\n";
+  }
+
+  return code;
+};
+
+Blockly.Python['microbit_Microbit_whenmicrobitbuttonpressed'] = function(block) {
+  Blockly.Python.imports_["microbit"] = "from microbit import *";
+
+  var key = block.getFieldValue('BUTTON');
+
+  var i = '';
+  while (Blockly.Python.loops_["microbit_Microbit_whenmicrobitbegin" + key + i]) {
+    if (i === '') {
+      i = 1;
+    } else {
+      i++;
+    }
+  }
+
+  Blockly.Python.loops_["microbit_Microbit_whenmicrobitbegin" + key + i] = "if button_" + key + ".is_pressed():\n" +
+    Blockly.Python.INDENT + Blockly.Python.INDENT + "on_button_" + key + i + "()";
+
+  var code = "def on_button_" + key + i + "():\n";
+  var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  if (!nextBlock) {
+    code += Blockly.Python.INDENT + "pass\n";
+  } else {
+    var variablesName = [];
+    for (var x in Blockly.Python.variables_) {
+      variablesName.push(Blockly.Python.variables_[x].slice(0, Blockly.Python.variables_[x].indexOf('=') - 1));
+    }
+    if (variablesName.length !== 0) {
+      code += Blockly.Python.INDENT + "global " + variablesName.join(', ') + "\n";
+    }
+
+    code = Blockly.Python.scrub_(block, code);
+  }
+
+  Blockly.Python.libraries_["def on_button_" + key + i] = code;
+  return null;
+};
+
+Blockly.Python['microbit_Microbit_whenmicrobitpinbeingtouched'] = function(block) {
+  Blockly.Python.imports_["microbit"] = "from microbit import *";
+
+  var pin = block.getFieldValue('PIN');
+
+  var i = '';
+  while (Blockly.Python.loops_["microbit_Microbit_whenmicrobitpinbeingtouched" + pin + i]) {
+    if (i === '') {
+      i = 1;
+    } else {
+      i++;
+    }
+  }
+
+  Blockly.Python.loops_["microbit_Microbit_whenmicrobitpinbeingtouched" + pin + i] = "if pin" + pin + ".is_pressed():\n" +
+    Blockly.Python.INDENT + Blockly.Python.INDENT + "on_pin" + pin + i + "()";
+
+  var code = "def on_pin" + pin + i + "():\n";
+  var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  if (!nextBlock) {
+    code += Blockly.Python.INDENT + "pass\n";
+  } else {
+    var variablesName = [];
+    for (var x in Blockly.Python.variables_) {
+      variablesName.push(Blockly.Python.variables_[x].slice(0, Blockly.Python.variables_[x].indexOf('=') - 1));
+    }
+    if (variablesName.length !== 0) {
+      code += Blockly.Python.INDENT + "global " + variablesName.join(', ') + "\n";
+    }
+
+    code = Blockly.Python.scrub_(block, code);
+  }
+
+  Blockly.Python.libraries_["def on_pin" + pin + i] = code;
+  return null;
+};
+
+Blockly.Python['microbit_Microbit_whenmicrobitgesture'] = function(block) {
+  Blockly.Python.imports_["microbit"] = "from microbit import *";
+
+  var sta = block.getFieldValue('STA');
+
+  var i = '';
+  while (Blockly.Python.loops_["microbit_Microbit_whenmicrobitgesture" + sta + i]) {
+    if (i === '') {
+      i = 1;
+    } else {
+      i++;
+    }
+  }
+
+  Blockly.Python.loops_["microbit_Microbit_whenmicrobitgesture" + sta + i] = "if accelerometer.was_gesture('" + sta + "'):\n" +
+    Blockly.Python.INDENT + Blockly.Python.INDENT + "on_" + sta + i + "()";
+
+  var code = "def on_" + sta + i + "():\n";
+  var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  if (!nextBlock) {
+    code += Blockly.Python.INDENT + "pass\n";
+  } else {
+    var variablesName = [];
+    for (var x in Blockly.Python.variables_) {
+      variablesName.push(Blockly.Python.variables_[x].slice(0, Blockly.Python.variables_[x].indexOf('=') - 1));
+    }
+    if (variablesName.length !== 0) {
+      code += Blockly.Python.INDENT + "global " + variablesName.join(', ') + "\n";
+    }
+
+    code = Blockly.Python.scrub_(block, code);
+  }
+
+  Blockly.Python.libraries_["def on_" + sta + i] = code;
+  return null;
+};
 
 Blockly.Python['microbit_pin_setDigitalOutput'] = function(block) {
   var pin = block.getFieldValue('PIN');
