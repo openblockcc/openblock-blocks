@@ -19,21 +19,20 @@
 'use strict';
 
 goog.provide('Blockly.Arduino.ottorobot');
-
 goog.require('Blockly.Arduino');
 
 
-Blockly.Arduino['arduino_ottoRobot_setInitial'] = function(block) {
+Blockly.Arduino['arduino_ottoRobot_setInitial'] = function (block) {
     Blockly.Arduino.includes_['include_ottoRobot'] = '#include <Otto.h>\nOtto Otto;';
-    Blockly.Arduino.definitions_['definitions_ottoRobot_setInitial'] = 
-    '#define PIN_TRIGGER         2   // TRIGGER PIN\n' +
-    '#define PIN_ECHO            3   // ECHO PIN\n' +
-    '#define PIN_LEG_L           4   // Left leg servo\n' +
-    '#define PIN_LEG_R           5   // Right leg servo\n' +
-    '#define PIN_FOOT_L          6   // Left foot servo\n' +
-    '#define PIN_FOOT_R          7   // Right foot servo\n' +
-    '#define PIN_BUZZER          13  // BUZZER PIN\n';
-    Blockly.Arduino.setups_['setups_ottoRobot_setInitial'] = 
+    Blockly.Arduino.definitions_['definitions_ottoRobot_setInitial'] =
+        '#define PIN_TRIGGER         2   // TRIGGER PIN\n' +
+        '#define PIN_ECHO            3   // ECHO PIN\n' +
+        '#define PIN_LEG_L           4   // Left leg servo\n' +
+        '#define PIN_LEG_R           5   // Right leg servo\n' +
+        '#define PIN_FOOT_L          6   // Left foot servo\n' +
+        '#define PIN_FOOT_R          7   // Right foot servo\n' +
+        '#define PIN_BUZZER          13  // BUZZER PIN\n';
+    Blockly.Arduino.setups_['setups_ottoRobot_setInitial'] =
         'Otto.init(PIN_LEG_L, PIN_LEG_R, PIN_FOOT_L, PIN_FOOT_R, true, PIN_BUZZER);\n' +
         '  Otto.sing(S_connection);   // Otto wake up!\n' +
         '  delay(50);\n' +
@@ -43,12 +42,12 @@ Blockly.Arduino['arduino_ottoRobot_setInitial'] = function(block) {
     return '';
 };
 
-Blockly.Arduino['arduino_ottoRobot_setHome'] = function(block) {
+Blockly.Arduino['arduino_ottoRobot_setHome'] = function (block) {
     var code = 'Otto.home();\n';
     return code;
 };
 
-Blockly.Arduino['arduino_ottoRobot_setGesture'] = function(block) {
+Blockly.Arduino['arduino_ottoRobot_setGesture'] = function (block) {
     var arg0 = block.getFieldValue('GESTURE');
 
     var code = '';
@@ -56,7 +55,7 @@ Blockly.Arduino['arduino_ottoRobot_setGesture'] = function(block) {
     return code;
 };
 
-Blockly.Arduino['arduino_ottoRobot_setPlaySound'] = function(block) {
+Blockly.Arduino['arduino_ottoRobot_setPlaySound'] = function (block) {
     var arg0 = block.getFieldValue('SOUND');
 
     var code = '';
@@ -64,7 +63,7 @@ Blockly.Arduino['arduino_ottoRobot_setPlaySound'] = function(block) {
     return code;
 };
 
-Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
+Blockly.Arduino['arduino_ottoRobot_setDance'] = function (block) {
     var arg0 = block.getFieldValue('DANCE');
 
     var dance_function = '';
@@ -73,12 +72,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
         dance_function = 'void feeling_good() {\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 1000, 30, 1);\n' +
             '  Otto.moonwalker(1, 1000, 30, -1);\n' +
-            '  Otto.moonwalker(1, 1000, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 1000, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -91,12 +90,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
             '  Otto.jitter(8, 900, 30);\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -109,12 +108,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
             '  Otto.jitter(8, 900, 30);\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -127,12 +126,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
             '  Otto.jitter(8, 900, 30);\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -151,12 +150,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
             '  delay(500);\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -175,12 +174,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
             '  delay(500);\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -195,12 +194,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 1000, 30, 1);\n' +
             '  Otto.moonwalker(1, 1000, 30, -1);\n' +
-            '  Otto.moonwalker(1, 1000, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 1000, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -397,12 +396,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
         dance_function = 'void touch_me() {\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 1000, 30, 1);\n' +
             '  Otto.moonwalker(1, 1000, 30, -1);\n' +
-            '  Otto.moonwalker(1, 1000, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 1000, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -415,12 +414,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
             '  Otto.jitter(8, 900, 30);\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -433,12 +432,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
             '  Otto.jitter(8, 900, 30);\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -451,12 +450,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
             '  Otto.jitter(8, 900, 30);\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -475,12 +474,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
             '  delay(500);\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -499,12 +498,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
             '  delay(500);\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -519,12 +518,12 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  Otto.moonwalker(1, 950, 30, -1);\n' +
-            '  Otto.moonwalker(1, 950, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 950, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.moonwalker(1, 1000, 30, 1);\n' +
             '  Otto.moonwalker(1, 1000, 30, -1);\n' +
-            '  Otto.moonwalker(1, 1000, 30, 1);\n' + 
+            '  Otto.moonwalker(1, 1000, 30, 1);\n' +
             '  delay(150);\n' +
             '  Otto.home();\n' +
             '  Otto.swing(3, 1000, 30);\n' +
@@ -548,8 +547,8 @@ Blockly.Arduino['arduino_ottoRobot_setDance'] = function(block) {
     return code;
 };
 
-Blockly.Arduino['arduino_ottoRobot_setDistance'] = function(block) {
-    Blockly.Arduino.customFunctions_['definitions_ottoRobot_setDistance'] = 
+Blockly.Arduino['arduino_ottoRobot_getDistance'] = function (block) {
+    Blockly.Arduino.customFunctions_['definitions_ottoRobot_getDistance'] =
         '#include <Ultrasonic.h>\n' +
         'Ultrasonic ultrasonic(PIN_TRIGGER, PIN_ECHO);\n' +
         'int distance;';
@@ -558,72 +557,72 @@ Blockly.Arduino['arduino_ottoRobot_setDistance'] = function(block) {
     return code;
 };
 
-Blockly.Arduino['arduino_ottoRobot_readDistance'] = function(block) {
+Blockly.Arduino['arduino_ottoRobot_readDistance'] = function (block) {
     var code = 'distance';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino['arduino_ottoRobot_setMove'] = function(block) {
+Blockly.Arduino['arduino_ottoRobot_setMove'] = function (block) {
     var arg0 = block.getFieldValue('MOVE');
     var arg1 = Blockly.Arduino.valueToCode(block, 'DURATION', Blockly.Arduino.ORDER_NONE) || 1;
 
     var code = '';
     if (arg0 == 'Forward') {
-        code = 'Otto.walk(1, ' + arg1*1000 + ', 1);\n';
+        code = 'Otto.walk(1, ' + arg1 * 1000 + ', 1);\n';
     } else if (arg0 == 'Backward') {
-        code = 'Otto.walk(1, ' + arg1*1000 + ', -1);\n';
+        code = 'Otto.walk(1, ' + arg1 * 1000 + ', -1);\n';
     } else if (arg0 == 'Turn Left') {
-        code = 'Otto.turn(1, ' + arg1*1000 + ', 1);\n';
+        code = 'Otto.turn(1, ' + arg1 * 1000 + ', 1);\n';
     } else if (arg0 == 'Turn Right') {
-        code = 'Otto.turn(1, ' + arg1*1000 + ', -1);\n';
+        code = 'Otto.turn(1, ' + arg1 * 1000 + ', -1);\n';
     }
 
     return code;
 };
 
-Blockly.Arduino['arduino_ottoRobot_setAction'] = function(block) {
+Blockly.Arduino['arduino_ottoRobot_setAction'] = function (block) {
     var arg0 = block.getFieldValue('ACTION');
     var arg1 = Blockly.Arduino.valueToCode(block, 'DURATION', Blockly.Arduino.ORDER_NONE) || 128;
     var arg2 = Blockly.Arduino.valueToCode(block, 'ANGLE', Blockly.Arduino.ORDER_NONE) || 1;
 
     var code = '';
-    if (arg0 == 'Ascending Turn') 
-        code = 'Otto.ascendingTurn(1, ' + arg1*1000 + ', '+ arg2 + ');\n';
-    else if (arg0 == 'Bend Left Foot') 
+    if (arg0 == 'Ascending Turn')
+        code = 'Otto.ascendingTurn(1, ' + arg1 * 1000 + ', ' + arg2 + ');\n';
+    else if (arg0 == 'Bend Left Foot')
         code = 'Otto.bend(1, ' + arg2 + ', -1);\n';
-    else if (arg0 == 'Bend Right Foot') 
+    else if (arg0 == 'Bend Right Foot')
         code = 'Otto.bend(1, ' + arg2 + ', 1);\n';
-    else if (arg0 == 'Crusaito Forward') 
-        code = 'Otto.crusaito(1, ' + arg1*1000 + ', '+ arg2 + ', 1);\n';
-    else if (arg0 == 'Crusaito Backward') 
-        code = 'Otto.crusaito(1, ' + arg1*1000 + ', '+ arg2 + ', -1);\n';
-    else if (arg0 == 'Flapping Forward') 
-        code = 'Otto.flapping(1, ' + arg1*1000 + ', '+ arg2 + ', 1);\n';
-    else if (arg0 == 'Flapping Backward') 
-        code = 'Otto.flapping(1, ' + arg1*1000 + ', '+ arg2 + ', -1);\n';
-    else if (arg0 == 'Jitter') 
-        code = 'Otto.jitter(1, ' + arg1*1000 + ', '+ arg2 + ');\n';
-    else if (arg0 == 'Jump') 
+    else if (arg0 == 'Crusaito Forward')
+        code = 'Otto.crusaito(1, ' + arg1 * 1000 + ', ' + arg2 + ', 1);\n';
+    else if (arg0 == 'Crusaito Backward')
+        code = 'Otto.crusaito(1, ' + arg1 * 1000 + ', ' + arg2 + ', -1);\n';
+    else if (arg0 == 'Flapping Forward')
+        code = 'Otto.flapping(1, ' + arg1 * 1000 + ', ' + arg2 + ', 1);\n';
+    else if (arg0 == 'Flapping Backward')
+        code = 'Otto.flapping(1, ' + arg1 * 1000 + ', ' + arg2 + ', -1);\n';
+    else if (arg0 == 'Jitter')
+        code = 'Otto.jitter(1, ' + arg1 * 1000 + ', ' + arg2 + ');\n';
+    else if (arg0 == 'Jump')
         code = 'Otto.jump(1, ' + arg2 + ');\n';
     else if (arg0 == 'Moonwalker Left')
-        code = 'Otto.moonwalker(1, ' + arg1*1000 + ', '+ arg2 + ', 1);\n';
-    else if (arg0 == 'Moonwalker Right') 
-        code = 'Otto.moonwalker(1, ' + arg1*1000 + ', '+ arg2 + ', -1);\n';
-    else if (arg0 == 'Shake Left Foot') 
-        code = 'Otto.shakeLeg(1, ' + arg1*1000 + ', -1);\n';
-    else if (arg0 == 'Shake Right Foot') 
-        code = 'Otto.shakeLeg(1, ' + arg1*1000 + ', 1);\n';
-    else if (arg0 == 'Swing') 
-        code = 'Otto.swing(1, ' + arg1*1000 + ', '+ arg2 + ');\n';
-    else if (arg0 == 'Tiptoe Swing') 
-        code = 'Otto.tiptoeSwing(1, ' + arg1*1000 + ', '+ arg2 + ');\n';
-    else if (arg0 == 'Up & Down') 
-            code = 'Otto.updown(1, ' + arg1*1000 + ', '+ arg2 + ');\n';
+        code = 'Otto.moonwalker(1, ' + arg1 * 1000 + ', ' + arg2 + ', 1);\n';
+    else if (arg0 == 'Moonwalker Right')
+        code = 'Otto.moonwalker(1, ' + arg1 * 1000 + ', ' + arg2 + ', -1);\n';
+    else if (arg0 == 'Shake Left Foot')
+        code = 'Otto.shakeLeg(1, ' + arg1 * 1000 + ', -1);\n';
+    else if (arg0 == 'Shake Right Foot')
+        code = 'Otto.shakeLeg(1, ' + arg1 * 1000 + ', 1);\n';
+    else if (arg0 == 'Swing')
+        code = 'Otto.swing(1, ' + arg1 * 1000 + ', ' + arg2 + ');\n';
+    else if (arg0 == 'Tiptoe Swing')
+        code = 'Otto.tiptoeSwing(1, ' + arg1 * 1000 + ', ' + arg2 + ');\n';
+    else if (arg0 == 'Up & Down')
+        code = 'Otto.updown(1, ' + arg1 * 1000 + ', ' + arg2 + ');\n';
 
     return code;
 };
 
-Blockly.Arduino['arduino_ottoRobot_setTone'] = function(block) {
+Blockly.Arduino['arduino_ottoRobot_setTone'] = function (block) {
     var arg0 = block.getFieldValue('TONE');
     // var arg0 = Blockly.Arduino.valueToCode(block, 'TONE', Blockly.Arduino.ORDER_NONE);
     var arg1 = Blockly.Arduino.valueToCode(block, 'DURATION', Blockly.Arduino.ORDER_NONE) || 100;
@@ -634,7 +633,7 @@ Blockly.Arduino['arduino_ottoRobot_setTone'] = function(block) {
     return code;
 };
 
-Blockly.Arduino['arduino_ottoRobot_setBendTone'] = function(block) {
+Blockly.Arduino['arduino_ottoRobot_setBendTone'] = function (block) {
     var arg0 = block.getFieldValue('INITIALTONE');
     var arg1 = block.getFieldValue('FINALTONE');
     var arg2 = Blockly.Arduino.valueToCode(block, 'STEP', Blockly.Arduino.ORDER_NONE) || 1.01;
@@ -646,10 +645,10 @@ Blockly.Arduino['arduino_ottoRobot_setBendTone'] = function(block) {
     return code;
 };
 
-Blockly.Arduino['arduino_ottoRobot_setCalibration'] = function(block) {
+Blockly.Arduino['arduino_ottoRobot_setCalibration'] = function (block) {
     Blockly.Arduino.includes_['include_ottoRobot'] = '#include <EEPROM.h>\n' +
         '#include <Otto.h>\nOtto Otto;';
-    Blockly.Arduino.definitions_['definitions_ottoRobot_setCalibration'] = 
+    Blockly.Arduino.definitions_['definitions_ottoRobot_setCalibration'] =
         '#define PIN_LEG_L           4   // Left leg servo\n' +
         '#define PIN_LEG_R           5   // Right leg servo\n' +
         '#define PIN_FOOT_L          6   // Left foot servo\n' +
@@ -756,13 +755,13 @@ Blockly.Arduino['arduino_ottoRobot_setCalibration'] = function(block) {
         '      break;\n' +
         '  }\n' +
         '}';
-    Blockly.Arduino.setups_['setups_ottoRobot_definitions_ottoRobot_setCalibration'] = 
-    'Otto.init(PIN_LEG_L, PIN_LEG_R, PIN_FOOT_L, PIN_FOOT_R, true, PIN_BUZZER);\n' +
-    '  Otto.home();\n' +
-    '  Serial.begin(9600);\n' +
-    '  while (!Serial);\n' +
-    '  help();';
-    
+    Blockly.Arduino.setups_['setups_ottoRobot_definitions_ottoRobot_setCalibration'] =
+        'Otto.init(PIN_LEG_L, PIN_LEG_R, PIN_FOOT_L, PIN_FOOT_R, true, PIN_BUZZER);\n' +
+        '  Otto.home();\n' +
+        '  Serial.begin(9600);\n' +
+        '  while (!Serial);\n' +
+        '  help();';
+
     var code = 'read_char(Serial.read());\n';
     return code;
 
