@@ -9,7 +9,7 @@ on:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         node-version: [14.x, 16.x]
@@ -24,6 +24,7 @@ jobs:
 
       - name: Set up Python 2.7
         run: |
+          sudo add-apt-repository ppa:deadsnakes/ppa
           sudo apt-get update
           sudo apt-get install -y \
             python2.7 python2.7-dev python2-pip-whl
@@ -59,7 +60,7 @@ jobs:
 
   publish:
     needs: check
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
 
@@ -81,6 +82,7 @@ jobs:
 
       - name: Set up Python 2.7
         run: |
+          sudo add-apt-repository ppa:deadsnakes/ppa
           sudo apt-get update
           sudo apt-get install -y \
             python2.7 python2.7-dev python2-pip-whl
