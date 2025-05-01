@@ -31,3 +31,5 @@ Blockly.Arduino['matrix'] = function(block) {
   }
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+Blockly.Arduino['matrix8x12'] = Blockly.Arduino['matrix'];
