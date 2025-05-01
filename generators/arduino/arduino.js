@@ -235,4 +235,74 @@ Blockly.Arduino['arduino_data_dataConvertASCIINumber'] = function(block) {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino['arduino_display_showImage'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '0';
+
+  Blockly.Arduino.includes_['include_arduino_led_matrix'] = '#include <Arduino_LED_Matrix.h>';
+  Blockly.Arduino.definitions_['definitions_arduino_led_matrix'] = "ArduinoLEDMatrix matrix;";
+  Blockly.Arduino.setups_['setups_matrix_begin'] = "matrix.begin();";
+
+  var hexArray = arg0.match(/.{32}/g).map(function(bin) {
+    return "0x" + parseInt(bin, 2).toString(16).padStart(8, '0');
+  });
+
+  var code = 'matrix.loadFrame((const uint32_t[]){ ' + hexArray[0] + ', ' + hexArray[1] + ', ' + hexArray[2] + ' });\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_display_showImageUntil'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '0';
+  var arg1 = Blockly.Arduino.valueToCode(block, 'TIME', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '0';
+
+  Blockly.Arduino.includes_['include_arduino_led_matrix'] = '#include <Arduino_LED_Matrix.h>';
+  Blockly.Arduino.definitions_['definitions_arduino_led_matrix'] = "ArduinoLEDMatrix matrix;";
+  Blockly.Arduino.setups_['setups_matrix_begin'] = "matrix.begin();";
+
+  var hexArray = arg0.match(/.{32}/g).map(function(bin) {
+    return "0x" + parseInt(bin, 2).toString(16).padStart(8, '0');
+  });
+
+  var code = 'matrix.loadFrame((const uint32_t[]){ ' + hexArray[0] + ', ' + hexArray[1] + ', ' + hexArray[2] +
+    ' });\ndelay(' + arg1 + ' * 1000);\nmatrix.clear();\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_display_showUntilScrollDone'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'TEXT', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '0';
+
+  Blockly.Arduino.includes_['include_arduino_graphics'] = '#include <ArduinoGraphics.h>';
+  Blockly.Arduino.includes_['include_arduino_led_matrix'] = '#include <Arduino_LED_Matrix.h>';
+  Blockly.Arduino.definitions_['definitions_arduino_led_matrix'] = "ArduinoLEDMatrix matrix;";
+  Blockly.Arduino.setups_['setups_matrix_begin'] = "matrix.begin();";
+  Blockly.Arduino.setups_['setups_matrix_text_font'] = "matrix.textFont(Font_4x6);";
+  Blockly.Arduino.setups_['setups_matrix_text_pos'] = "matrix.beginText(0, 1, 0xFFFFFF);";
+  Blockly.Arduino.setups_['setups_matrix_text_speed'] = "matrix.textScrollSpeed(100);";
+
+  var code = 'matrix.println((const char[]){' + arg0 + '});\nmatrix.endText(SCROLL_LEFT);\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_display_clearDisplay'] = function() {
+  Blockly.Arduino.includes_['include_arduino_led_matrix'] = '#include <Arduino_LED_Matrix.h>';
+  Blockly.Arduino.definitions_['definitions_arduino_led_matrix'] = "ArduinoLEDMatrix matrix;";
+  Blockly.Arduino.setups_['setups_matrix_begin'] = "matrix.begin();";
+
+  var code = 'matrix.clear();\n';
+  return code;
+};
+
+Blockly.Arduino['arduino_display_lightPixelAt'] = function(block) {
+  var sta = block.getFieldValue('STATE');
+  var x = Blockly.Arduino.valueToCode(block, 'X', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '0';
+  var y = Blockly.Arduino.valueToCode(block, 'Y', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '0';
+
+  Blockly.Arduino.includes_['include_arduino_led_matrix'] = '#include <Arduino_LED_Matrix.h>';
+  Blockly.Arduino.definitions_['definitions_arduino_led_matrix'] = "ArduinoLEDMatrix matrix;";
+  Blockly.Arduino.definitions_['definitions_arduino_led_matrix_frame'] = "byte frame[8][12] = { 0 };";
+  Blockly.Arduino.setups_['setups_matrix_begin'] = "matrix.begin();";
+
+  var code = 'frame[' + x + '][' + y + '] = ' + sta + ';\nmatrix.renderBitmap(frame, 8, 12);\n';
+  return code;
+};
+
 
