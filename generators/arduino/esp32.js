@@ -26,12 +26,10 @@ goog.require('Blockly.Arduino');
 Blockly.Arduino['arduino_pin_esp32SetPwmOutput'] = function(block) {
   var arg0 = block.getFieldValue('PIN') || '0';
   var arg1 = Blockly.Arduino.valueToCode(block, 'OUT', Blockly.Arduino.ORDER_UNARY_POSTFIX) || 0;
-  var arg2 = block.getFieldValue('CH') || '0';
 
-  Blockly.Arduino.setups_['esp32SetPwmOutput' + arg0] = 'ledcSetup(' + arg2 + ', 490, 8);';
-  Blockly.Arduino.setups_['esp32SetPwmOutput2' + arg0] = 'ledcAttachPin(' + arg0 + ', ' + arg2 + ');';
+  Blockly.Arduino.setups_['esp32SetPwmOutput' + arg0] = 'ledcAttach(' + arg0 + ', 490, 8);';
 
-  var code = "ledcWrite(" + arg2 + ", " + arg1 + ");\n";
+  var code = "ledcWrite(" + arg0 + ", " + arg1 + ");\n";
   return code;
 };
 
@@ -42,7 +40,6 @@ Blockly.Arduino['arduino_pin_esp32SetDACOutput'] = function(block) {
   return code;
 };
 
-
 Blockly.Arduino['arduino_pin_esp32ReadTouchPin'] = function(block) {
   var arg0 = block.getFieldValue('PIN') || '0';
   var code = "touchRead(" + arg0 + ")";
@@ -52,11 +49,10 @@ Blockly.Arduino['arduino_pin_esp32ReadTouchPin'] = function(block) {
 Blockly.Arduino['arduino_pin_esp32SetServoOutput'] = function(block) {
   var arg0 = block.getFieldValue('PIN') || '0';
   var arg1 = Blockly.Arduino.valueToCode(block, 'OUT', Blockly.Arduino.ORDER_UNARY_POSTFIX) || 0;
-  var arg2 = block.getFieldValue('CH') || '0';
 
-  Blockly.Arduino.includes_['esp32SetServoOutput'] = '#include <Servo.h>';
+  Blockly.Arduino.includes_['esp32SetServoOutput'] = '#include <ESP32Servo.h>';
   Blockly.Arduino.definitions_['esp32SetServoOutput' + arg0] = 'Servo servo_' + arg0 + ';';
-  Blockly.Arduino.setups_['esp32SetServoOutput' + arg0] = 'servo_' + arg0 + '.attach' + '(' + arg0 + ', ' + arg2 + ');';
+  Blockly.Arduino.setups_['esp32SetServoOutput' + arg0] = 'servo_' + arg0 + '.attach' + '(' + arg0 + ');';
 
   var code = 'servo_' + arg0 + '.write' + '(' + arg1 + ');\n';
   return code;
