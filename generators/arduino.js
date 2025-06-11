@@ -200,7 +200,7 @@ Blockly.Arduino.finish = function(code) {
   // setup()
   ret += "void setup() {\n";
   if (setups.length != 0) {
-    ret += Blockly.Arduino.INDENT + setups.join('\n' + Blockly.Arduino.INDENT) + "\n";
+    ret += Blockly.Arduino.INDENT + setups.join('\n' + Blockly.Arduino.INDENT) + "\n\n";
   }
   ret += code;
   ret += "}\n";
